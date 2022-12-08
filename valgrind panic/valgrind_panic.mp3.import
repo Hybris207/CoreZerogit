@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/valgrind_panic.mp3-c3a6a274f448f8f3c14200cc8f8ae62a.mp3str"
+
+[deps]
+
+source_file="res://valgrind panic/valgrind_panic.mp3"
+dest_files=[ "res://.import/valgrind_panic.mp3-c3a6a274f448f8f3c14200cc8f8ae62a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

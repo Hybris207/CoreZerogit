@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://valgrind panic/image/light.png" type="Texture" id=1]
+[ext_resource path="res://valgrind panic/image/core_core.png" type="Texture" id=2]
+[ext_resource path="res://valgrind panic/image/core.png" type="Texture" id=3]
+[ext_resource path="res://valgrind panic/script/ShakingLight.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 191.024
+
+[node name="Base" type="KinematicBody2D"]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 524288
+position = Vector2( -18.5, -19.5 )
+scale = Vector2( 1.87188, 2.00937 )
+texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 524288
+texture = ExtResource( 1 )
+texture_scale = 2.0
+color = Color( 1, 0.101961, 1, 1 )
+energy = 2.0
+range_item_cull_mask = 262145
+
+[node name="Interior" type="Sprite" parent="."]
+position = Vector2( 3.99997, 11 )
+scale = Vector2( 7.875, 8.625 )
+texture = ExtResource( 2 )
+
+[node name="InteriorLight" type="Light2D" parent="Interior"]
+position = Vector2( 0.275864, -0.533333 )
+texture = ExtResource( 1 )
+texture_scale = 0.03
+color = Color( 1, 0.101961, 1, 1 )
+energy = 1.7
+script = ExtResource( 4 )
+
+[node name="OnMakesYouBig" type="Timer" parent="Interior/InteriorLight"]
+autostart = true
+
+[node name="OnMakesYouSmall" type="Timer" parent="Interior/InteriorLight"]
+
+[node name="ShakingCore" type="Timer" parent="Interior"]
+
+[connection signal="timeout" from="Interior/InteriorLight/OnMakesYouBig" to="Interior/InteriorLight" method="_on_OnMakesYouBig_timeout"]
+[connection signal="timeout" from="Interior/InteriorLight/OnMakesYouSmall" to="Interior/InteriorLight" method="_on_OnMakesYouSmall_timeout"]
+[connection signal="timeout" from="Interior/ShakingCore" to="Interior" method="_on_ShakingCore_timeout"]
